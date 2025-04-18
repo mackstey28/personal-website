@@ -15,8 +15,6 @@ export function LettersPullUp({
 
     const ref = React.useRef(null);
     const isInView = useInView(ref, { once: true });
-    const [startAnimating, setStartAnimating] = React.useState(false);
-    const [showText, setShowText] = React.useState(true);
 
     const totalDuration = text.length * 0.1 + 0.5; // estimate of full animation duration
 
