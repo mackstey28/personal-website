@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import { GradualSpacing } from './gradual-spacing';
-import { LettersPullUp } from './letters-pull-up';
-import { BlurIn } from './blur-in';
+import { GradualSpacing } from '../animations/gradual-spacing';
+import { LettersPullUp } from '../animations/letters-pull-up';
+import { BlurIn } from '../animations/blur-in';
 
 export default function AnimatedSequence() {
   const [step, setStep] = React.useState(0);

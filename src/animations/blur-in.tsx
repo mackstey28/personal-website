@@ -20,7 +20,7 @@ export const BlurIn = ({
     if (isInView) {
       const timeout = setTimeout(() => {
         setStartExit(true);
-      }, (1.2 + delayBeforeExit) * 3000); // entry duration + optional delay
+      }, (1.2 + delayBeforeExit) * 2000); // entry duration + optional delay
 
       return () => clearTimeout(timeout);
     }
