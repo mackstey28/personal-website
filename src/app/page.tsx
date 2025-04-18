@@ -3,6 +3,7 @@
 import React from 'react';
 import { GradualSpacing } from './gradual-spacing';
 import { LettersPullUp } from './letters-pull-up';
+import { BlurIn } from './blur-in';
 
 export default function AnimatedSequence() {
   const [step, setStep] = React.useState(0);
@@ -24,12 +25,9 @@ export default function AnimatedSequence() {
         />
       )}
       {step === 2 && (
-        <GradualSpacing
-          text="hope you enjoy your stay"
-          delayBeforeStart={0}
-          delayBeforeExit={1}
-          onComplete={() => console.log('Done!')}
-        />
+        <BlurIn onComplete={() => setStep(3)}>
+          enjoy!
+        </BlurIn>
       )}
     </div>
   );
