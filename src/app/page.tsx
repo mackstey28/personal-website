@@ -4,6 +4,7 @@ import React from 'react';
 import { GradualSpacing } from '../animations/gradual-spacing';
 import { LettersPullUp } from '../animations/letters-pull-up';
 import { BlurIn } from '../animations/blur-in';
+import { PathDrawing } from '@/animations/path-drawing';
 
 export default function AnimatedSequence() {
   const [step, setStep] = React.useState(0);
@@ -28,6 +29,9 @@ export default function AnimatedSequence() {
         <BlurIn onComplete={() => setStep(3)}>
           enjoy!
         </BlurIn>
+      )}
+      {step === 3 && (
+        <PathDrawing></PathDrawing>
       )}
     </div>
   );
