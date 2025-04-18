@@ -1,7 +1,7 @@
 'use client';
 import { cn } from './cn';
+import React from 'react';
 import { motion, useInView } from 'framer-motion';
-import * as React from 'react';
 
 export function LettersPullUp({
     text,
@@ -12,12 +12,19 @@ export function LettersPullUp({
     className?: string;
     onComplete: () => void;
 }) {
-    const totalTime = text.length * 0.05 + 0.5; // match animation
+
+    const ref = React.useRef(null);
+    const isInView = useInView(ref, { once: true });
+    const [startAnimating, setStartAnimating] = React.useState(false);
+    const [showText, setShowText] = React.useState(true);
+
+    const totalDuration = text.length * 0.1 + 0.5; // estimate of full animation duration
+
     React.useEffect(() => {
-      const timeout = setTimeout(() => {
-        onComplete();
-      }, totalTime * 1000);
-      return () => clearTimeout(timeout);
+        const timeout = setTimeout(() => {
+            onComplete();
+        }, totalDuration * 1000);
+        return () => clearTimeout(timeout);
     }, [text, onComplete]);
     const splittedText = text.split('');
 
@@ -31,10 +38,9 @@ export function LettersPullUp({
             },
         }),
     };
-    const ref = React.useRef(null);
-    const isInView = useInView(ref, { once: true });
+
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center centerText">
             {splittedText.map((current, i) => (
                 <motion.div
                     key={i}

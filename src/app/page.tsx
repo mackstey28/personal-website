@@ -19,7 +19,7 @@ export default function AnimatedSequence() {
       )}
       {step === 1 && (
         <LettersPullUp
-          text="welcome to my personal website"
+          text="welcome to my personal site"
           onComplete={() => setStep(2)}
         />
       )}

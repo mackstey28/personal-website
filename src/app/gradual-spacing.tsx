@@ -1,14 +1,12 @@
 'use client';
 
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'framer-motion';
-
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 
 export function GradualSpacing({
   text = 'Gradual Spacing',
   delayBeforeStart = 0, // wait this long before animation starts
-  delayBeforeExit = 0,  // optional: extra delay before it exits\
+  delayBeforeExit = 0,  // optional: extra delay before it exits
   onComplete,
 }: {
   text: string;
@@ -18,21 +16,42 @@ export function GradualSpacing({
 }) {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true });
+  const [startAnimating, setStartAnimating] = React.useState(false);
   const [showText, setShowText] = React.useState(true);
 
   const totalDuration = text.length * 0.1 + 0.5; // estimate of full animation duration
 
   React.useEffect(() => {
     if (isInView) {
-      const timeout = setTimeout(() => {
-        setShowText(false);
-        onComplete?.(); // 🔥 call when done
-      }, (totalDuration + delayBeforeExit) * 1000);
-  
-      return () => clearTimeout(timeout);
-    }
-  }, [isInView, totalDuration, delayBeforeExit, onComplete]);
+      const startTimer = setTimeout(() => {
+        setStartAnimating(true);
+      }, delayBeforeStart * 1000);
 
+      return () => clearTimeout(startTimer);
+    }
+  }, [isInView, delayBeforeStart]);
+
+  React.useEffect(() => {
+    if (startAnimating) {
+      const exitTimer = setTimeout(() => {
+        setShowText(false);
+      }, (totalDuration + delayBeforeExit) * 1000);
+
+      return () => clearTimeout(exitTimer);
+    }
+  }, [startAnimating, totalDuration, delayBeforeExit]);
+
+  // Call onComplete after exit finishes
+  React.useEffect(() => {
+    if (!showText) {
+      const completeTimer = setTimeout(() => {
+        onComplete?.();
+      }, 1500); // match exit animation duration
+
+      return () => clearTimeout(completeTimer);
+    }
+  }, [showText, onComplete]);
+  
   return (
     <div className="flex space-x-1 justify-center centerText">
       <AnimatePresence>
