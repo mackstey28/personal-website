@@ -25,6 +25,11 @@
     url("../fonts/poppins-medium.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Fireside";   /*Can be any text*/
+  src: local("Fireside"),
+    url("../fonts/Fireside.otf") format("truetype");
+}
 
 body {
   background: var(--background);
@@ -38,4 +43,14 @@ body {
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
+}
+
+.nameText {
+  font-family: "Fireside";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-size: 150px;
+  white-space: nowrap;
 }
