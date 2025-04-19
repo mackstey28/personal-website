@@ -31,6 +31,7 @@ export default function AnimatedSequence() {
         </BlurIn>
       )}
       {step === 3 && (
+        // <h1 className="nameText">MAXWELL TANG</h1>
         <PathDrawing></PathDrawing>
       )}
     </div>
