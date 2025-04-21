@@ -45,12 +45,10 @@ body {
   transform: translateX(-50%) translateY(-50%);
 }
 
-.nameText {
-  font-family: "Fireside";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  font-size: 150px;
-  white-space: nowrap;
+.frontMenu {
+  font-family: "Fireside"; 
+  display: 'flex';
+  gap: '1rem';
+  position: 'absolute';
+  z-index: 10;
 }

@@ -4,14 +4,16 @@ import React from 'react';
 import { GradualSpacing } from '../animations/gradual-spacing';
 import { LettersPullUp } from '../animations/letters-pull-up';
 import { BlurIn } from '../animations/blur-in';
-import { PathDrawing } from '@/animations/path-drawing';
+import { PathDrawing } from '../animations/path-drawing';
+import { FrontMenu } from '../animations/front-menu';
 
 export default function AnimatedSequence() {
   const [step, setStep] = React.useState(0);
+  const [animationComplete, setAnimationComplete] = React.useState(false);
 
   return (
     <div className="flex flex-col gap-8 items-center justify-center min-h-screen">
-      {step === 0 && (
+      {/* {step === 0 && (
         <GradualSpacing
           text="hello there"
           delayBeforeStart={0}
@@ -31,9 +33,10 @@ export default function AnimatedSequence() {
         </BlurIn>
       )}
       {step === 3 && (
-        // <h1 className="nameText">MAXWELL TANG</h1>
         <PathDrawing></PathDrawing>
-      )}
+      )} */}
+      <PathDrawing onComplete={() => setAnimationComplete(true)}></PathDrawing>
+      <FrontMenu visible={animationComplete}></FrontMenu>
     </div>
   );
 }

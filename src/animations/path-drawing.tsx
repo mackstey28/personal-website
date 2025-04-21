@@ -1,6 +1,8 @@
 "use client"
 
-import { motion } from "motion/react"
+import { motion, useAnimation } from "motion/react"
+import React, { useState } from "react"
+import { useEffect } from "react"
 
 const draw = {
     hidden: { pathLength: 0, opacity: 0 },
@@ -32,61 +34,94 @@ const dark = {
     },
 }
 
-export function PathDrawing() {
+const moveUp = {
+    initial: { y: -10 },
+    up: { y: -100, transition: { duration: 1, delay: 3, ease: [0.25, 0.1, 0.25, 1] } },
+};
+
+export function PathDrawing({
+    onComplete,
+  }: {
+    onComplete: () => void;
+  }) {
+    const drawControls = useAnimation();
+    const moveControls = useAnimation();
+
+    useEffect(() => {
+        const sequence = async () => {
+            await drawControls.start("visible");
+            await moveControls.start("up");
+        };
+        sequence();
+    }, []);
+
+    useEffect(() => {
+        const animationDuration = 4250; // milliseconds
+        const timer = setTimeout(() => {
+          onComplete();
+        }, animationDuration);
+    
+        return () => clearTimeout(timer);
+      }, [onComplete]);
+
     return (
-        <div className="centerText">
-            <motion.svg width="960" height="300" viewBox="0 0 500 180" initial="hidden" animate="visible">
+        <motion.div variants={moveUp} initial="initial" animate={moveControls}>
+            <div className="centerText">
+                <motion.svg
+                    width="480"
+                    height="150"
+                    viewBox="0 0 500 180"
+                    initial="hidden"
+                    animate="visible">
 
-            {/* first stroke of M */}
-            <motion.line x1="0" y1="160" x2="0" y2="10" stroke="#ffffff" variants={draw} custom={0} style={round} />
-            
-            {/* second stroke of M */}
-            <motion.line x1="1.09" y1="13.9" x2="66" y2="120" stroke="#ffffff" variants={draw} custom={2} style={round} />
-            
-            {/* third stroke of M */}
-            <motion.line x1="54" y1="120" x2="118.91" y2="13.9" stroke="#ffffff" variants={draw} custom={0} style={round} />
-            
-            {/* black stroke blocking second stroke of M */}
-            <motion.line x1="20.68" y1="74.34" x2="53.18" y2="127.79" stroke="#0a0a0a" variants={dark} custom={0} style={round} />
-            
-            {/* black stroke blocking third stroke of M */}
-            <motion.line x1="66.82" y1="127.79" x2="99.32" y2="74.34" stroke="#0a0a0a" variants={dark} custom={0} style={round} />
-            
-            {/* fourth stroke of M */}
-            <motion.line x1="120" y1="10" x2="120" y2="160" stroke="#ffffff" variants={draw} custom={2} style={round} />
-            
-            {/* first stroke of A */}
-            <motion.line x1="180" y1="167.5" x2="240" y2="10" stroke="#ffffff" variants={draw} custom={0} style={round} />
-            
-            {/* second stroke of A */}
-            <motion.line x1="240" y1="10" x2="300" y2="167.5" stroke="#ffffff" variants={draw} custom={2} style={round} />
-            
-            {/* black stroke blocking top of A */}
-            <motion.line x1="220" y1="2.5" x2="260" y2="2.5" stroke="#0a0a0a" variants={dark} custom={0} style={round} />
-            
-            {/* black stroke blocking bottom of A */}
-            <motion.line x1="140" y1="167.5" x2="340" y2="167.5" stroke="#0a0a0a" variants={dark} custom={0} style={round} />
-            
-            {/* first stroke of X */}
-            <motion.line x1="470" y1="2.5" x2="350" y2="167.5" stroke="#ffffff" variants={draw} custom={0} style={round} />
-            
-            {/* second stroke of X */}
-            <motion.line x1="350" y1="2.5" x2="470" y2="167.5" stroke="#ffffff" variants={draw} custom={2} style={round} />
-            
-            {/* black stroke blocking top of X */}
-            <motion.line x1="330" y1="2.5" x2="490" y2="2.5" stroke="#0a0a0a" variants={dark} custom={0} style={round} />
-            
-            {/* black stroke blocking bottom of X */}
-            <motion.line x1="330" y1="167.5" x2="490" y2="167.5" stroke="#0a0a0a" variants={dark} custom={0} style={round} />
-            </motion.svg>
+                    {/* first stroke of M */}
+                    <motion.line x1="0" y1="160" x2="0" y2="10" stroke="#ffffff" variants={draw} custom={0} style={round} />
 
-        </div>
+                    {/* second stroke of M */}
+                    <motion.line x1="1.09" y1="13.9" x2="66" y2="120" stroke="#ffffff" variants={draw} custom={2} style={round} />
+
+                    {/* third stroke of M */}
+                    <motion.line x1="54" y1="120" x2="118.91" y2="13.9" stroke="#ffffff" variants={draw} custom={0} style={round} />
+
+                    {/* black stroke blocking second stroke of M */}
+                    <motion.line x1="20.68" y1="74.34" x2="53.18" y2="127.79" stroke="#0a0a0a" variants={dark} custom={0} style={round} />
+
+                    {/* black stroke blocking third stroke of M */}
+                    <motion.line x1="66.82" y1="127.79" x2="99.32" y2="74.34" stroke="#0a0a0a" variants={dark} custom={0} style={round} />
+
+                    {/* fourth stroke of M */}
+                    <motion.line x1="120" y1="10" x2="120" y2="160" stroke="#ffffff" variants={draw} custom={2} style={round} />
+
+                    {/* first stroke of A */}
+                    <motion.line x1="180" y1="167.5" x2="240" y2="10" stroke="#ffffff" variants={draw} custom={0} style={round} />
+
+                    {/* second stroke of A */}
+                    <motion.line x1="240" y1="10" x2="300" y2="167.5" stroke="#ffffff" variants={draw} custom={2} style={round} />
+
+                    {/* black stroke blocking top of A */}
+                    <motion.line x1="220" y1="2.5" x2="260" y2="2.5" stroke="#0a0a0a" variants={dark} custom={0} style={round} />
+
+                    {/* black stroke blocking bottom of A */}
+                    <motion.line x1="140" y1="167.5" x2="340" y2="167.5" stroke="#0a0a0a" variants={dark} custom={0} style={round} />
+
+                    {/* first stroke of X */}
+                    <motion.line x1="470" y1="2.5" x2="350" y2="167.5" stroke="#ffffff" variants={draw} custom={0} style={round} />
+
+                    {/* second stroke of X */}
+                    <motion.line x1="350" y1="2.5" x2="470" y2="167.5" stroke="#ffffff" variants={draw} custom={2} style={round} />
+
+                    {/* black stroke blocking top of X */}
+                    <motion.line x1="330" y1="2.5" x2="490" y2="2.5" stroke="#0a0a0a" variants={dark} custom={0} style={round} />
+
+                    {/* black stroke blocking bottom of X */}
+                    <motion.line x1="330" y1="167.5" x2="490" y2="167.5" stroke="#0a0a0a" variants={dark} custom={0} style={round} />
+                </motion.svg>
+            </div>
+        </motion.div>
+        
     )
 }
 
-/**
- * ==============   Styles   ================
- */
 const round: React.CSSProperties = {
     strokeWidth: 15,
     strokeLinecap: "butt",
