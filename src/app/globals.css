@@ -46,9 +46,12 @@ body {
 }
 
 .frontMenu {
-  font-family: "Fireside"; 
+  font-Family: "Fireside";
   display: 'flex';
   gap: '1rem';
   position: 'absolute';
+  left: '49.2%';
+  transform: 'translateX(-50%)';
   z-index: 10;
+  text-align: 'center';
 }
