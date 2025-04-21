@@ -23,7 +23,7 @@ export function FrontMenu({ visible }: { visible: boolean }) {
                             transition={{ duration: 1, delay: index * 0.5, ease: "easeOut" }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ color: '#808080' }} // not working wtf!!!
-                            // onClick={() => location.href="about"}
+                            onClick={() => location.href="about"}
                             style={{
                                 background: 'none',
                                 border: 'none',
