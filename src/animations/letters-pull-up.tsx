@@ -23,29 +23,29 @@ export function LettersPullUp({
   const totalDuration = characters.length * 0.05 + 1.5;
 
   // Start exit after entry animation finishes + optional delay
-  React.useEffect(() => {
-    if (isInView) {
-      const timeout = setTimeout(() => {
-        setStartExit(true);
-      }, (totalDuration + delayBeforeExit) * 1000);
+  // React.useEffect(() => {
+  //   if (isInView) {
+  //     const timeout = setTimeout(() => {
+  //       setStartExit(true);
+  //     }, (totalDuration + delayBeforeExit) * 1000);
 
-      return () => clearTimeout(timeout);
-    }
-  }, [isInView, totalDuration, delayBeforeExit]);
+  //     return () => clearTimeout(timeout);
+  //   }
+  // }, [isInView, totalDuration, delayBeforeExit]);
 
   // After exit animation ends, remove and trigger onComplete
-  React.useEffect(() => {
-    if (startExit) {
-      const exitDuration = characters.length * 0.05 + 0.5;
+  // React.useEffect(() => {
+  //   if (startExit) {
+  //     const exitDuration = characters.length * 0.05 + 0.5;
 
-      const timeout = setTimeout(() => {
-        setVisible(false);
-        onComplete?.();
-      }, exitDuration * 1000);
+  //     const timeout = setTimeout(() => {
+  //       setVisible(false);
+  //       onComplete?.();
+  //     }, exitDuration * 1000);
 
-      return () => clearTimeout(timeout);
-    }
-  }, [startExit, onComplete, characters.length]);
+  //     return () => clearTimeout(timeout);
+  //   }
+  // }, [startExit, onComplete, characters.length]);
 
   const pullupVariant = {
     initial: { y: 10, opacity: 0 },
@@ -62,7 +62,7 @@ export function LettersPullUp({
   };
 
   return (
-    <div className="flex justify-center centerText">
+    <div className="flex justify-center pageTitle">
       <AnimatePresence>
         {visible &&
           characters.map((current, i) => (

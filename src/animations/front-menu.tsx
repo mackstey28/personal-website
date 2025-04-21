@@ -18,6 +18,7 @@ export function FrontMenu({ visible }: { visible: boolean }) {
                         <motion.button
                             key={label}
                             initial={{ opacity: 0, y: 10 }}
+                            exit={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 1, delay: index * 0.5, ease: "easeOut" }}
                             whileHover={{ scale: 1.05 }}
