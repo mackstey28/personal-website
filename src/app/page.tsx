@@ -43,7 +43,7 @@ export default function AnimatedSequence() {
             </motion.div>
 
             {/* Static title */}
-            <motion.div>
+            {/* <motion.div>
               <img
                 src={nameImg.src}
                 alt="Title goes here"
@@ -52,7 +52,7 @@ export default function AnimatedSequence() {
                   height: '64px',
                 }}
               />
-            </motion.div>
+            </motion.div> */}
 
             {/* Menu, spawns after opening animation */}
             {openingAnimationComplete && (
