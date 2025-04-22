@@ -12,10 +12,17 @@ import githubImg from '../static/github.png'
 import linkedinImg from '../static/linkedin.png'
 
 export default function AnimatedSequence() {
+  // keep track of current "page" we're viewing
+  // they're not separate pages, just different components we're displaying at the moment
   const [currentPage, setCurrentPage] = React.useState("HOME");
+  // do I need this? might delete later
   const [showIntro, setShowIntro] = React.useState(true);
+  // one time delay for menu to wait for opening animation
   const [openingAnimationComplete, setOpeningAnimationComplete] = React.useState(false);
+  // we only run opening animation of my name once
   const [openingAnimationAlreadyDone, setOpeningAnimationAlreadyDone] = React.useState(false);
+  // need this because when navigating between pages, motion components are not waiting 
+  // for each other to finish their exit animations before starting their own
   const [animationCurrentlyPlaying, setAnimationCurrentlyPlaying] = React.useState(false);
 
   const handleMenuClick = (label: string) => {
@@ -121,7 +128,7 @@ export default function AnimatedSequence() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10, transition: { duration: 0.5, ease: 'easeOut' } }}
-          transition={{ duration: 1, delay: 0.5, transition: { duration: 0.5 } }}
+          transition={{ duration: 1, delay: 0.5 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setShowIntro(true)}
@@ -181,7 +188,7 @@ export default function AnimatedSequence() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10, transition: { duration: 0.5, ease: 'easeOut' } }}
-              transition={{ duration: 1, delay: 0.5, transition: { duration: 0.5 } }}
+              transition={{ duration: 1, delay: 0.5 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => window.open('https://github.com/mackstey28/', '_blank', 'noopener,noreferrer')}
@@ -211,7 +218,7 @@ export default function AnimatedSequence() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10, transition: { duration: 0.5, ease: 'easeOut' } }}
-              transition={{ duration: 1, delay: 1, transition: { duration: 0.5 } }}
+              transition={{ duration: 1, delay: 1 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => window.open('https://www.linkedin.com/in/maxwell-tang/', '_blank', 'noopener,noreferrer')}
