@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { PathDrawing } from '../animations/path-drawing';
-import { FrontMenu } from '../animations/front-menu';
 import { AnimatePresence, motion } from 'framer-motion';
 import Parallax from '../animations/parallax';
 
@@ -31,7 +30,7 @@ export default function AnimatedSequence() {
     setShowIntro(false);
     setTimeout(() => {
       setCurrentPage(label);
-    }, 1000); // Delay to allow exit animation to complete
+    }, ); // Delay to allow exit animation to complete, removed due to it causing issues
   };
 
   return (
@@ -181,7 +180,10 @@ export default function AnimatedSequence() {
         mode="wait"
         onExitComplete={() => setAnimationCurrentlyPlaying(false)}>
         {currentPage == "CONTACT" && !showIntro && (
-          <motion.div>
+          <motion.div
+            style={{
+              position: "fixed"
+            }}>
             {/* Github */}
             <motion.button
               key="githubButton"
@@ -243,6 +245,15 @@ export default function AnimatedSequence() {
               />
             </motion.button>
           </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Misc */}
+      <AnimatePresence 
+        mode="wait"
+        onExitComplete={() => setAnimationCurrentlyPlaying(false)}>
+        {currentPage == "MISC" && !showIntro && (
+          <h1>HI!!! need to implement this puppy</h1>
         )}
       </AnimatePresence>
     </div>
