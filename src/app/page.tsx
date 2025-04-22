@@ -9,6 +9,7 @@ import nameImg from '../static/name.png'
 import backButtonImg from '../static/back_arrow.png'
 import githubImg from '../static/github.png'
 import linkedinImg from '../static/linkedin.png'
+import emailImg from '../static/email.png'
 
 export default function AnimatedSequence() {
   // keep track of current "page" we're viewing
@@ -244,6 +245,36 @@ export default function AnimatedSequence() {
                 }}
               />
             </motion.button>
+            {/* Email */}
+            <motion.button
+              key="emailButton"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10, transition: { duration: 0.5, ease: 'easeOut' } }}
+              transition={{ duration: 1, delay: 1.5 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.open('mailto:maxwelltang28@gmail.com', '_blank', 'noopener,noreferrer')}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                fontSize: '1rem',
+                color: '#ffffff',
+                cursor: 'pointer',
+                margin: '16px',
+              }}
+              onAnimationComplete={() => setAnimationCurrentlyPlaying(true)}
+            >
+              <img
+                src={emailImg.src}
+                alt="Back"
+                style={{
+                  width: '64px',
+                  height: '64px',
+                }}
+              />
+            </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -253,7 +284,7 @@ export default function AnimatedSequence() {
         mode="wait"
         onExitComplete={() => setAnimationCurrentlyPlaying(false)}>
         {currentPage == "MISC" && !showIntro && (
-          <h1>HI!!! need to implement this puppy</h1>
+          <h1>HI!!!</h1>
         )}
       </AnimatePresence>
     </div>
