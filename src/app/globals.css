@@ -37,7 +37,15 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.centerText {
+.animatedIntroText {
+  font-family: "Poppins";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.staticIntroText {
   font-family: "Poppins";
   position: absolute;
   top: 50%;

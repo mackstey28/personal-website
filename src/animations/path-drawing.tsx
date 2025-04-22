@@ -66,7 +66,7 @@ export function PathDrawing({
 
     return (
         <motion.div variants={moveUp} initial="initial" animate={moveControls}>
-            <div className="centerText">
+            <div className="animatedIntroText">
                 <motion.svg
                     width="480"
                     height="150"

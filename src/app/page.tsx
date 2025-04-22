@@ -12,13 +12,15 @@ import githubImg from '../static/github.png'
 import linkedinImg from '../static/linkedin.png'
 
 export default function AnimatedSequence() {
-  const [step, setStep] = React.useState(0);
   const [currentPage, setCurrentPage] = React.useState("HOME");
   const [showIntro, setShowIntro] = React.useState(true);
-    const [openingAnimationComplete, setOpeningAnimationComplete] = React.useState(false);
-
+  const [openingAnimationComplete, setOpeningAnimationComplete] = React.useState(false);
+  const [openingAnimationAlreadyDone, setOpeningAnimationAlreadyDone] = React.useState(false);
+  const [animationCurrentlyPlaying, setAnimationCurrentlyPlaying] = React.useState(false);
 
   const handleMenuClick = (label: string) => {
+    setOpeningAnimationAlreadyDone(true);
+    setOpeningAnimationComplete(false);
     setShowIntro(false);
     setTimeout(() => {
       setCurrentPage(label);
@@ -32,8 +34,9 @@ export default function AnimatedSequence() {
         {showIntro && (
           <>
             {/* Animated title */}
+            {!openingAnimationAlreadyDone && (
             <motion.div
-              key="path"
+              key="animatedIntro"
               initial={{ opacity: 0, y: 0 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -50 }}
@@ -41,21 +44,31 @@ export default function AnimatedSequence() {
             >
               <PathDrawing onComplete={() => setOpeningAnimationComplete(true)} />
             </motion.div>
+            )}
 
             {/* Static title */}
-            {/* <motion.div>
+            {openingAnimationAlreadyDone && !animationCurrentlyPlaying && (
+            <motion.div
+              key="staticIntro"
+              initial={{ opacity: 0, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
+              transition={{ duration: 0.5 }}
+              onAnimationComplete={() => setOpeningAnimationComplete(true)}>
               <img
                 src={nameImg.src}
                 alt="Title goes here"
                 style={{
-                  width: '64px',
-                  height: '64px',
+                  width: '480px',
+                  height: '150px',
+                  transform: 'translate(0px, -100px)'
                 }}
               />
-            </motion.div> */}
+            </motion.div>
+            )}
 
             {/* Menu, spawns after opening animation */}
-            {openingAnimationComplete && (
+            {openingAnimationComplete && !animationCurrentlyPlaying && (
               <motion.div
                 key="menu"
                 initial={{ opacity: 0, y: 0 }}
@@ -99,8 +112,9 @@ export default function AnimatedSequence() {
           </>
         )}
       </AnimatePresence>
-
+        
       {/* Back button */}
+      <AnimatePresence mode="wait">
       {currentPage != "HOME" && !showIntro && (
         <motion.button
           key="backButton"
@@ -135,9 +149,12 @@ export default function AnimatedSequence() {
           />
         </motion.button>
       )}
+      </AnimatePresence>
 
       {/* About */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence 
+        mode="wait"
+        onExitComplete={() => setAnimationCurrentlyPlaying(false)}>
         {currentPage == "ABOUT" && !showIntro && (
             <motion.div
               key="parallax"
@@ -145,6 +162,7 @@ export default function AnimatedSequence() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
               transition={{ duration: 0.5 }}
+              onAnimationComplete={() => setAnimationCurrentlyPlaying(true)}
             >
               <Parallax />
             </motion.div>
@@ -152,7 +170,9 @@ export default function AnimatedSequence() {
       </AnimatePresence>
 
       {/* Contact */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence 
+        mode="wait"
+        onExitComplete={() => setAnimationCurrentlyPlaying(false)}>
         {currentPage == "CONTACT" && !showIntro && (
           <motion.div>
             {/* Github */}
@@ -204,6 +224,7 @@ export default function AnimatedSequence() {
                 cursor: 'pointer',
                 margin: '16px',
               }}
+              onAnimationComplete={() => setAnimationCurrentlyPlaying(true)}
             >
               <img
                 src={linkedinImg.src}
