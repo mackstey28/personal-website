@@ -92,7 +92,7 @@ export default function AnimatedSequence() {
                   marginTop: 50,
                 }}
               >
-                {['ABOUT', 'CONTACT', 'MISC'].map((label, index) => (
+                {['ABOUT', 'CONTACT', 'WORKS'].map((label, index) => (
                   <motion.button
                     key={label}
                     initial={{ opacity: 0, y: 10 }}
@@ -279,12 +279,12 @@ export default function AnimatedSequence() {
         )}
       </AnimatePresence>
 
-      {/* Misc */}
+      {/* Works */}
       <AnimatePresence 
         mode="wait"
         onExitComplete={() => setAnimationCurrentlyPlaying(false)}>
-        {currentPage == "MISC" && !showIntro && (
-          <h1>HI!!!</h1>
+        {currentPage == "WORKS" && !showIntro && (
+          <h1>NYC Breakdance Spots, https://mackstey28.github.io/nyc-breakdance-spots/</h1>
         )}
       </AnimatePresence>
     </div>
