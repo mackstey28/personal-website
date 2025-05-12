@@ -10,6 +10,8 @@ import backButtonImg from '../static/back_arrow.png'
 import githubImg from '../static/github.png'
 import linkedinImg from '../static/linkedin.png'
 import emailImg from '../static/email.png'
+import { GradualSpacing } from '@/animations/gradual-spacing';
+import { LettersPullUp } from '@/animations/letters-pull-up';
 
 export default function AnimatedSequence() {
   // keep track of current "page" we're viewing
@@ -92,7 +94,7 @@ export default function AnimatedSequence() {
                   marginTop: 50,
                 }}
               >
-                {['ABOUT', 'CONTACT', 'WORKS'].map((label, index) => (
+                {['ABOUT', 'CONTACT', 'PROJECTS'].map((label, index) => (
                   <motion.button
                     key={label}
                     initial={{ opacity: 0, y: 10 }}
@@ -279,12 +281,17 @@ export default function AnimatedSequence() {
         )}
       </AnimatePresence>
 
-      {/* Works */}
+      {/* PROJECTS */}
       <AnimatePresence 
         mode="wait"
         onExitComplete={() => setAnimationCurrentlyPlaying(false)}>
-        {currentPage == "WORKS" && !showIntro && (
-          <h1>NYC Breakdance Spots, https://mackstey28.github.io/nyc-breakdance-spots/</h1>
+        {currentPage == "PROJECTS" && !showIntro && (
+          <>
+            <LettersPullUp text="NYC Breakdance Spots" />
+            <LettersPullUp text="TF2 Jump Maps" />
+            <LettersPullUp text="Dance!" />
+          </>
+          // <h1>NYC Breakdance Spots, https://mackstey28.github.io/nyc-breakdance-spots/</h1>
         )}
       </AnimatePresence>
     </div>
